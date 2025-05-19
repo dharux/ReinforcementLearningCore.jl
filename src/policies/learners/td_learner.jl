@@ -121,8 +121,7 @@ function RLBase.optimise!(
 end
 
 function RLBase.optimise!(learner::TDLearner, stage::PostActStage, trajectory::Trajectory)
-    idx = findlast(trajectory.container.sampleable_inds)
-    if !isnothing(idx)
-        optimise!(learner, trajectory.container[idx])
+    for batch in trajectory.learner
+        optimise!(learner, batch)
     end
 end
